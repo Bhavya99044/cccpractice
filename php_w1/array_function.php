@@ -144,14 +144,6 @@ krsort($products);
 echo "Sorted product names (descending): " . implode(', ', array_keys($products)) . "<br>";
 
 
-for ($i = 1; $i <=5; $i++) {
-    for ($j = 1; $j <5; $j++) {
-        if($i==$j){
-        echo "$j ";
-        }
-        
-    }
 
-    echo "<br>";
-}
+
 ?>

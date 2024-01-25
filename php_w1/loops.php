@@ -27,12 +27,6 @@ foreach ($products as $productName => $productPrice) {
     echo "$productName: $$productPrice\n";
 }
 
-for ($i = 5; $i >= 1; $i--) {
-    for ($j = 1; $j <= $i; $j++) {
-        echo "$j ";
-    }
 
-    echo "<br>";
-}
 
 ?>

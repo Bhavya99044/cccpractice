@@ -1,43 +1,14 @@
 <?php
 
+include "Lib/Autoload.php";
+$request=new Model_Request();
+if(!$request->isPost()){
+    $product=new View_product();
+    echo $product->toHtml();
 
-//     public $name;
-
-
-//     function __construct($n){
-//       $this->name=$n;
-//     }
-//     function show(){
-
-//         echo "this is value of now   ".$this->name;
-//     }
-
-//     function __destct(){
-//         echo "connection closed";
-//     }
-// }
-
-// $p1=new vijay("naaaam");
-// $p1->show();
-// $p1->name="boss";
-// $p1->show();
-
-class vijay{
-
-    public $name="yah";
-    public $age=89;
-
-    public function __construct($n,$a){
-        $this->name=$n;
-        $this->age=$a;
-    }
-    public function __sleep(){
-
-        return array("name");
-    }
 }
-
-$p1=new vijay("nzaaa",90);
-$test=serialize($p1);
-echo $test;
+else{
+    $product=new Model_Product();
+    $product->save($request->getParams('pdata'));
+}
 ?>

@@ -283,7 +283,12 @@ $account1->withdraw(200);
 // Display account information
 $account1->displayInfo();
 ?>
-
+class A{
+    public $a;
+    public function test(){
+        $this->
+    }
+}
 
 
 

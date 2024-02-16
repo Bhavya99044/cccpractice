@@ -48,7 +48,13 @@ class Core_Model_DB_Adapter
 
     public function fetchRow($query)
     {
-
+        $row = [];
+        $this->connect();
+        $result = mysqli_query($this->connect, $query);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $row = $_row;
+        }
+        return $row;
     }
 
     public function insert($query)

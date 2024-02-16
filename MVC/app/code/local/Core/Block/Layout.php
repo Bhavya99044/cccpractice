@@ -48,6 +48,8 @@ class Core_Block_Layout extends Core_Block_Template
     public function prepareChildren()
     {
         $header = $this->createBlock('page/Header');
+        echo "<pre>";
+        print_r($header);
         $footer = $this->createBlock('page/Footer');
         $content = $this->createBlock('page/Content');
         $head = $this->createBlock('page/Head');
@@ -70,4 +72,4 @@ class Core_Block_Layout extends Core_Block_Template
 // public function getRequest(){
 //     return  Mage::getModel('core/request');
 // }
-//    ?>
+//       ?>

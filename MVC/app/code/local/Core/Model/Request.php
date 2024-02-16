@@ -2,19 +2,19 @@
 class Core_Model_Request
 {
 
-    protected $getModelName;
-    protected $getControllerName;
-    protected $getActionName;
+    protected $_getModuleName;
+    protected $_getControllerName;
+    protected $_getActionName;
 
 
     public function __construct()
     {
         $uri = $this->getRequestURI();
-        $uri = explode("/", $uri);
+        $uri = array_filter(explode("/", $uri));
 
-        $this->getModelName = $uri[0];
-        $this->getControllerName = $uri[0];
-        $this->getActionName = $uri[0];
+        $this->_getModuleName = isset($uri[0]) ? $uri[0] : "page";
+        $this->_getControllerName = isset($uri[1]) ? $uri[1] : "index";
+        $this->_getActionName = isset($uri[2]) ? $uri[2] : "index";
 
     }
     public function getParams($key = '')
@@ -54,29 +54,30 @@ class Core_Model_Request
     public function getRequestURI()
     {
         $requst = $_SERVER["REQUEST_URI"];
-        $arr = str_replace("/ccc/mvc/", "", $requst);
+        $arr = str_replace("/practice/MVC/", "", $requst);
         return $arr;
     }
 
     public function getModuleName()
     {
 
-        return $this->getModuleName();
+        return $this->_getModuleName;
 
     }
     public function getControllerName()
     {
-        return $this->getControllerName();
+        return $this->_getControllerName;
     }
     public function getActionName()
     {
-        return $this->getActionName();
+        return $this->_getActionName;
 
     }
 
     public function getFullControllerClass()
     {
-        $fullControllerClass = "Page_" . $this->controllerName . "_" . $this->moduleName;
-        return $fullControllerClass;
+        $classname = $this->_getModuleName . '_Controller_' . $this->_getControllerName;
+        $classname = ucwords($classname, "_");
+        return $classname;
     }
 }

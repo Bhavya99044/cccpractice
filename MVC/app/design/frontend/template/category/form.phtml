@@ -1,0 +1,117 @@
+<?php
+
+$product_model = $this->getProduct();
+
+// print_r($product_model);
+// print_r($product_model->getId());
+// print_r($product_model->getProName());
+// print_r($product_model->getProCategory());
+// print_r($product_model);
+?>
+
+
+<div class="container d-flex justify-content-center align-items-center vh-150">
+    <div class="form">
+        <h2>category Form</h2>
+        <form action="<?php echo $this->getUrl('admin/catalog_category/save') ?>" method="post">
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="hidden" class="form-control" name="pdata[product_id]" id="name"
+                        value="<?php echo $product_model->getId() ?>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" name="pdata[cu]" id="name"
+                        value="<?php echo $product_model->getName() ?>">
+                </div>
+                <div class="col-md-6">
+                    <label for="sku">SKU:</label>
+                    <input type="text" class="form-control" name="pdata[sku]" id="sku"
+                        value="<?php echo $product_model->getSku() ?>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="color">Color:</label>
+                    <input type="text" class="form-control" name="pdata[color]" id="color"
+                        value="<?php echo $product_model->getColor() ?>">
+                </div>
+                <div class="col-md-6">
+                    <label for="size">Size:</label>
+                    <input type="text" class="form-control" name="pdata[size]" id="size"
+                        value="<?php echo $product_model->getSize() ?>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="description">Description:</label>
+                    <textarea class="form-control" name="pdata[description]" id="description" rows="5"
+                        value="<?php echo $product_model->getDescription() ?>"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="image_link">Image Link:</label>
+                    <input type="text" class="form-control" name="pdata[image_link]" id="image_link"
+                        value="<?php echo $product_model->getimageLink() ?>">
+                </div>
+                <div class="col-md-6">
+                    <label for="link">Link:</label>
+                    <input type="text" class="form-control" name="pdata[link]" id="link"
+                        value="<?php echo $product_model->getLink() ?>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="price">Price:</label>
+                    <input type="number" class="form-control" name="pdata[price]" id="price"
+                        value="<?php echo $product_model->getPrice() ?>">
+                </div>
+                <div class="col-md-4">
+                    <label for="mfr_cost">MFR Cost:</label>
+                    <input type="number" class="form-control" name="pdata[mfr_cost]" id="mfr_cost"
+                        value="<?php echo $product_model->getMfrCost() ?>">
+                </div>
+                <div class="col-md-4">
+                    <label for="shipping_cost">Shipping Cost:</label>
+                    <input type="number" class="form-control" name="pdata[shipping_cost]" id="shipping_cost"
+                        value="<?php echo $product_model->getShippingCost() ?>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="total_cost">Total Cost:</label>
+                    <input type="number" class="form-control" name="pdata[total_cost]" id="total_cost"
+                        value="<?php echo $product_model->gettotal_cost() ?>">
+                </div>
+                <div class="col-md-4">
+                    <label for="margin_percentage">Margin Percentage:</label>
+                    <input type="number" class="form-control" name="pdata[margin_percentage]" id="margin_percentage"
+                        value="<?php echo $product_model->getMarginPercentage() ?>">
+                </div>
+                <div class="col-md-4">
+                    <label for="min_price">Min Price:</label>
+                    <input type="number" class="form-control" name="pdata[min_price]" id="min_price"
+                        value="<?php echo $product_model->getMinPrice() ?>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="status">Status:</label>
+                    <input type="text" class="form-control" name="pdata[status]" id="status"
+                        value="<?php echo $product_model->getStatus() ?>">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

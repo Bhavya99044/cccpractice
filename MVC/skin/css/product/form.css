@@ -1,0 +1,63 @@
+/* General Styles */
+.form {
+    border: 1px solid #000;
+    width: 30vw;
+    padding: 15px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+h2 {
+    color: #333;
+}
+
+/* Row Styles */
+.row {
+    margin-bottom: 15px;
+}
+
+/* Label Styles */
+label {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Input Styles */
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Submit Button Style */
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+    .form {
+        width: 80vw;
+    }
+    label {
+        width: 100%;
+        display: block;
+        margin-bottom: 5px;
+    }
+}

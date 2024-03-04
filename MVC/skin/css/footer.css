@@ -1,0 +1,32 @@
+/* Footer styles */
+
+
+footer {
+  background-color: #343a40; /* Dark background color */
+}
+
+footer h4 {
+  color: #fff; /* Heading color */
+}
+
+footer p {
+  color: #ccc; /* Text color */
+}
+
+footer a {
+  color: #fff; /* Link color */
+}
+
+footer a:hover {
+  color: #ffd700; /* Link color on hover */
+}
+
+/* Separator line */
+hr {
+  border-color: #fff; /* Separator line color */
+}
+
+/* Copyright notice */
+footer p.mb-0 {
+  color: #ccc; /* Text color */
+}

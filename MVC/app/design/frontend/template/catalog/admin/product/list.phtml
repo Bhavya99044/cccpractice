@@ -1,0 +1,79 @@
+
+
+
+
+
+
+
+<div class="container">
+
+    <h2>Product List</h2>
+    <table id="productTable" class="display">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>SKU</th>
+                <th>Color</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->getProductData() as $product): ?>
+                <tr>
+                    <td>
+                        <?php echo $product->getId(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getName(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getSku(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getColor(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getCategoryId(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getPrice(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getStatus(); ?>
+                    </td>
+                    <td>
+                        <button class="edit-button"
+                            onclick="window.location.href='form?id=<?php echo $product->getId(); ?>'">Edit</button>
+                    </td>
+                    <td>
+                        <button class="delete-button"
+                            onclick="window.location.href='delete?id=<?php echo $product->getId(); ?>'">Delete</button>
+                    </td>
+
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#productTable').DataTable({
+            // You can add options for DataTables here
+            // Example:
+            // "paging": true,
+            // "ordering": true,
+            // "info": true,
+            // "searching": true
+        });
+    });
+</script>

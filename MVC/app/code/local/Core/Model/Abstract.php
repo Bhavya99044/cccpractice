@@ -2,139 +2,144 @@
 
 class Core_Model_Abstract
 {
-
-    protected $data = [];
-    protected $resourceClass = '';
-    protected $collectionClass = '';
-    protected $resource = null;
-    protected $collection = null;
-
-
-
-
+    protected $_data = [];
+    protected $_resourceClass = '';
+    protected $_collectionClass = '';
+    protected $_resource = null;
+    protected $_collection = null;
     public function __construct()
     {
         $this->init();
-
-
     }
 
-    public function setResourceClass($resourceClass)
+    public function init()
     {
-        $this->resourceClass = $resourceClass;
     }
 
-    public function setCollectionClass($collectionClass)
+    public function setResourceClass($_resourceClass)
     {
-        $this->collectionClass = $collectionClass;
     }
+
+
+    public function setCollectionClass($_collectionClass)
+    {
+    }
+
 
     public function setId($id)
     {
+        $this->_data[$this->getResource()->getPrimaryKey()] = $id;
+        return $this;
 
     }
+
 
     public function getId()
     {
-
-        return $this->data['id'];
-
-
+        // print_r( $this->_data[$this->getResource()->getPrimaryKey()]); die;
+        return  $this->_data[$this->getResource()->getPrimaryKey()];
     }
+
 
     public function getResource()
     {
-        // $modelClass = get_Class($this);
-        // $modelClass = 'Product_Model_Resource_Product';
-        // // $result = str_replace("Product_Model_", "", $modelClass);
-        // // echo substr_replace($modelClass, "",  strpos($string, "Product_Model_"), strlen("Product_Model_"));
-        // // echo get_class($this);
-        // return new $modelClass;
 
         return new $this->_resourceClass();
     }
 
-    public function camelCase2UnderScore($str, $separator = "_")
-    {
-        if (empty($str)) {
-            return $str;
-        }
-        $str = lcfirst($str);
-        $str = preg_replace("/[A-Z]/", $separator . "$0", $str);
-        return strtolower($str);
-    }
-
-
-
 
     public function getCollection()
     {
-
+        $collection = new $this->_collectionClass();
+        $collection->setResource($this->getResource());
+        $collection->select();
+        return $collection;
     }
 
-    public function getPrimaryKey()
-    {
 
-    }
 
-    public function getTableName()
-    {
 
-    }
 
     public function __set($key, $value)
     {
-
     }
+
 
     public function __get($key)
     {
-
     }
 
+    public function __call($name, $args)
+    {
+        // $name = strtolower(substr($name, 3));
+        $name = $this->camelTodashed(substr($name, 3));
+        return isset($this->_data[$name])
+            ? $this->_data[$name]
+            : "";
+    }
+    public function dashesToCamelCase($string, $capitalizeFirstCharacter = false)
+    {
+        $str = str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
+        if (!$capitalizeFirstCharacter) {
+            $str[0] = strtolower($str[0]);
+        }
+        return $str;
+    }
+    public function camelTodashed($className)
+    {
+        return strtolower(preg_replace('/([a-zA-Z])(?=[A-Z])/', '$1_', $className));
+    }
     public function __unset($key)
     {
-
     }
+
 
     public function getData($key = null)
     {
-
+       
+        return($this->_data);
     }
+
 
     public function setData($data)
     {
-
+        $this->_data = $data;
+        return $this;
     }
+
 
     public function addData($key, $value)
     {
-
     }
+
 
     public function removeData($key = null)
     {
-
     }
+
 
     public function save()
     {
-
+        $this->getResource()->save($this);
+        return $this;
     }
+
 
     public function load($id, $column = null)
     {
 
         $this->_data = $this->getResource()->load($id, $column);
-
-        // print_r($this->getResource());
-        // return $this;
-
-
+        // print_r($this->_data);
+        // echo "SELECT * FROM {$this->getResource()->getTableName()} WHERE {$this->getResource()->getPrimaryKey()} = {$id}  LIMIT 1";
+        return $this;
     }
+
 
     public function delete()
     {
-
+        if ($this->getId()) {
+            $this->getResource()->delete($this);
+        }// ama if add thyu che check kar leje
+        return $this;
     }
 }

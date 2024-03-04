@@ -2,21 +2,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <?php echo ($this->getChild('head')->toHtml()) ?>
+    <?php echo $this->getChildHtml('head'); ?>
 </head>
 
 <body>
+    <div class="header">
+        <?php echo $this->getChildHtml('header'); ?>
+    </div>
+    <div class="content">
+        <!-- <div class="left">Left</div> -->
+        <!-- <div class="content"> -->
 
-
-    <div class="">
-        <pre><?php echo ($this->getChildHtml('header')) ?></div>
-    <div class=""><pre><?php echo ($this->getChildHtml('footer')) ?></div>
-    <div class=""><pre><?php echo ($this->getChildHtml('content')) ?></div>
-    <div class=""><pre><?php echo ($this->getChildHtml('messages')) ?></div>
-
-
+            <?php echo $this->getChildHtml('content'); ?>
+        <!-- </div> -->
+        <!-- <div class="right">Right</div> -->
+    </div>
+    <div class="footer">
+        <?php echo $this->getChildHtml('footer'); ?>
+    </div>
 </body>
+
 </html>

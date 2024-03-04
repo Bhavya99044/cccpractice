@@ -1,0 +1,150 @@
+<?php
+$productData = $this->getProductData();
+$imagePath = Mage::getBaseUrl("media/product/");
+
+?>
+
+<!-- <div class="tbl"> -->
+<!-- <table border="1px">
+        <tr>
+            <th>id</th>
+            <th>Sku</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Description</th>
+            <th>ImageLink</th>
+            <th>Link</th>
+            <th>Category ID</th>
+            <th>Price</th>
+            <th>Mfr Cost</th>
+            <th>Shipping Cost</th>
+            <th>Total Cost</th>
+            <th>Margin Percentage</th>
+            <th>Min Price</th>
+            <th>Status</th>
+            <th colspan=2>Action</th>
+    </tr> -->
+<!-- <?php
+//foreach ($productData->getData() as $product) {                             ?>
+            <tr>
+                <td>
+                    <?php //echo $product->getProductId();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getSku();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getName();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getColor();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getSize();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getDescription();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getImageLink();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getLink();                             ?>
+                </td>
+                <td>
+                    <?php //echo $this->getCategoryNameById($product->getCategoryId())                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getPrice();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getMfrCost();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getShippingCost();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getTotalCost();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getMarginPercentage();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getMinPrice();                             ?>
+                </td>
+                <td>
+                    <?php //echo $product->getStetus();                             ?>
+                </td>
+            </tr>
+        <?php // }                             ?> -->
+
+
+<!-- <div class="prodcard">
+    <?php //foreach ($productData->getData() as $product) {      ?>
+        <div class="card">
+            <img src="<?php //echo $imagePath . $product->getImageLink();
+            ; ?>" alt="Product Image">
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <td>
+                        <?php //echo $product->getProductId();      ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Sku</th>
+                    <td>
+                        <?php //echo $product->getSku();      ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Status</th>
+                    <td class="<?php //echo ($product->getStetus() == 'Enabled') ? 'status-active' : 'status-inactive';      ?>">
+                        <?php //echo $product->getStetus();      ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <?php // }      ?>
+</div> -->
+
+<div class="product-cards">
+    <?php foreach ($productData->getData() as $product): ?>
+        <form method="POST" action="">
+            <div class="card">
+
+                <img src="<?php echo $imagePath . $product->getImageLink(); ?>" alt="Product Image">
+                <div class="product-info">
+                    <h2 class="product-title">
+                        <?php echo $product->getProductId(); ?>
+                    </h2>
+                    <p class="product-description">
+                        <?php echo $product->getDescription(); ?>
+                    </p>
+                    <p class="product-price">
+                        <?php echo $product->getPrice() ?>
+                    </p>
+
+                    <div class="quantity-box">
+                        <span class="quantity-label">Quantity:</span>
+                        <div class="quantity-controls">
+                            <button class="quantity-button quantity-minus">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-button quantity-plus">+</button>
+                        </div>
+                    </div>
+
+                    <input type="submit" class="add-to-cart" value="Add to Cart">
+                </div>
+
+            </div>
+        </form>
+    <?php endforeach; ?>
+</div>
+
+
+<!-- </table> -->
+<!-- </div> -->

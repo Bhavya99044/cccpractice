@@ -1,37 +1,62 @@
 <?php
+
 class Mage
 {
-    private static $baseDir = "C:/xampp\htdocs\practice\MVC";
+    private static $_registry;
+    private static $_singleton;
+
+    private static $baseDir = "C:/xampp/htdocs/intern/ccc";
+    private static $baseUrl = 'http://localhost/intern/ccc';
+
+
+
     public static function init()
     {
-        // $request = new Core_Model_Request();
-        //  $request->getRequestURI();
-
-        $cnObj = new Core_Controller_Front();
-        $requestModel = Mage::getModel("core/request");
-
-        echo $requestModel->getRequestURI();
-        $cnObj->init();
-
+        $frontController = new Core_Controller_Front();
+        $frontController->init();
     }
+
+
+    public static function getSingleton($className)
+    {
+        if (isset(self::$_singleton[$className])) {
+            return self::$_singleton[$className];
+        } else {
+            return self::$_singleton[$className] = self::getModel($className);
+        }
+    }
+
+
+
     public static function getModel($className)
     {
+        // $array = explode("/", $modelName);
+        // $a = array_map("ucfirst", $array);
+        // $fullName = $a[0]."_Model_".$a[1];
+        // // echo $fullName;
+        // return new $fullName();
 
-        $arg = str_replace("/", "_Model_", $className);
-
-        $arg = ucwords($arg);
-
-        return new $arg;
+        $className = str_replace("/", "_Model_", $className);
+        $className = ucwords(str_replace("/", "_", $className), '_');
+        return new $className();
     }
-
     public static function getBlock($className)
     {
+        $className = str_replace("/", "_Block_", $className);
+        $className = ucwords(str_replace("/", "_", $className), '_');
+        return new $className();
+    }
 
-        $arg = str_replace("/", "_Block_", $className);
 
-        $arg = ucwords($arg);
+    public static function register($key, $value)
+    {
+        self::$_registry[$key] = $value;
 
-        return new $arg;
+    }
+
+    public static function registry($key)
+    {
+
     }
 
     public static function getBaseDir($subDir = null)
@@ -41,11 +66,13 @@ class Mage
         }
         return self::$baseDir;
     }
-}
-// insert ignore
-// insert duplicate unique key mark karine
-// use 3 key as combination
-// where jevi rite in use kariye e rite in ma
-// limit date_offset_getfind in set_error_handlerprice wise attendsing oder ma lai
+    public static function getBaseUrl($subUrl = null)
+    {
+        if ($subUrl) {
+            return self::$baseUrl . "/" . $subUrl;
+        }
+        return self::$baseUrl.'/';
+    }
 
-?>
+
+}

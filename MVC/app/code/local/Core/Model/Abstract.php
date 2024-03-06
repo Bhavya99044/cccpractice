@@ -14,6 +14,7 @@ class Core_Model_Abstract
 
     public function init()
     {
+        
     }
 
     public function setResourceClass($_resourceClass)

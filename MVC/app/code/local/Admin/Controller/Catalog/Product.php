@@ -59,5 +59,6 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
         // print_r($productModel);
         $productModel->setData($data)->save();
         // print_r($productModel);
+        
     }
 }

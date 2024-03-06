@@ -1,0 +1,71 @@
+
+
+
+
+
+
+
+<div class="container">
+
+    <h2>List</h2>
+    <table id="productTable" class="display">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>session_id</th>
+                <th>userName</th>
+                <th>loan_amount</th>
+                <th>monthly_amount</th>
+                <th>bank_code</th>
+                <th>term</th>
+                <th>result</th>
+                <th>created_at</th>
+
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->getProductData() as $product): ?>
+                <tr>
+                    <td>
+                        <?php echo $product->getId(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getSession_id(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getUser_name(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getloan_amount(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getMonthly_amount(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getBank_code(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getResult(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getCreated_at(); ?>
+                    </td>
+                    <td>
+                        <?php echo $product->getTerm(); ?>
+                    </td>
+                    <td>
+                   
+                    <td>
+                        <button class="delete-button"
+                            onclick="window.location.href='delete?id=<?php echo $product->getId(); ?>'">Delete</button>
+                    </td>
+
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+

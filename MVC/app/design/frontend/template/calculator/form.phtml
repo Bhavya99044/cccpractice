@@ -1,0 +1,50 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator</title>
+</head>
+<body>
+
+<?php
+ $bankRates =$this->getBankRates(); 
+
+?>
+
+<form action="<?php echo $this->getUrl('loanCalculator/user/save') ?>" method="post">
+    <label for="username">User Name:</label>
+    <input type="text" name="pdata[user_name]" id="user_name" <?php echo isset($_POST['username']) ? 'value="' . htmlspecialchars($_POST['username']) . '"' : ''; ?> required>
+
+    <label for="loan_amount">monthly Amount:</label>
+    <input type="number" name="pdata[loan_amount]" id="loan_amount" required>
+    <label for="loan_amount">Loan Amount:</label>
+    <input type="number" name="pdata[monthly_amount]" id="monthly_amount" required>
+
+    <label for="term">Term (Years):</label>
+    <select name="pdata[term]" id="term" required>
+        <?php for ($i = 1; $i <= 20; $i++) : ?>
+            <option value="<?php echo $i; ?>"><?php echo $i; ?> years</option>
+        <?php endfor; ?>
+        </select>
+
+<!-- <label for="bank">Bank:</label> -->
+<!-- <label for="bank">Bank:</label>
+    <select name="bank" id="bank" required>
+        <?php foreach ($bankRates as $bank => $rate) : ?>
+            <option value="<?php echo $bank; ?>"><?php echo $bank; ?> - Rate: <?php echo $rate; ?>%</option>
+        <?php endforeach; ?>
+    </select> -->
+
+
+
+    <button type="submit" name="submit">submit</button>
+</form>
+
+</body>
+</html>
+
+?>

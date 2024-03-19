@@ -1,51 +1,64 @@
 <?php
-class Sales_Controller_Quote extends Core_Controller_Front_Action{
-
-    
-
-    public function addAction() {
-echo "<pre>";
-        // $request = $this->getRequest()->getParams('cart');
-        $request = ['product_id'=>48,'qty'=>5];
-        $quote = Mage::getSingleton("sales/quote")
+class Sales_Controller_Quote extends Core_Controller_Front_Action
+{
+    public function addAction()
+    {
+        $request = $this->getRequest()->getParams('cart');
+        $quote = Mage::getSingleton('sales/quote')
             ->addProduct($request);
-        // echo get_class($quote   );
-   
-      //$customerId = Mage::getSingleton("core/session")->get("logged_in_customer_id");
-    
-      // Check if a customer is logged in
-    //   if ($customerId) {
-    //       // Retrieve cart data from persistent storage
-    //       $cartData = $this->getCartData();
-          
-    //       // Get the product ID from the request
-    //       $productId = $this->getRequest()->getQueryData('id');
-          
-    //       // Check if the product ID is valid and exists in the cart
-    //       if (!empty($productId) && isset($cartData[$customerId][$productId])) {
-    //           // Display product information for the specified product
-    //           $product = $cartData[$customerId][$productId];
-    //           echo '<h2>Product Details</h2>';
-    //           echo 'Product ID: ' . $productId . '<br>';
-    //           echo 'Quantity: ' . $product['quantity'] . '<br>';
-    //           // You can display other product details here as needed
-    //       } else {
-    //           echo '<h2>Product Not Found in Cart</h2>';
-    //       }
-    //   } else {
-    //      $this->setRedirect("customer/account/login");
-    //   }
+        $this->setRedirect('cart');
+    }
+    public function deleteAction()
+    {
+        $itemId = $this->getRequest()->getParams('id');
+        $request = ['item_id' => $itemId];
+        $quote = Mage::getSingleton('sales/quote')
+            ->removeProduct($request);
+        $this->setRedirect('cart');
+    }
+    public function updateAction()
+    {
+        $request = $this->getRequest()->getParams('cart');
+
+        $quote = Mage::getSingleton('sales/quote')
+            ->updateProduct($request);
+        $this->setRedirect('cart');
     }
 
-    public function editAction() {
-        $this->linkActionProceed();
+    public function addressAction()
+    {
+        $request = $this->getRequest()->getParams('checkout');
+        $checkout = Mage::getSingleton('sales/quote')->addAddress($request);
+        $this->setRedirect('cart/checkout');
     }
-    public function removeAction(){
-        $this->removeActionProceed(); 
-    }
-    
-    public function postdataAction() {  
-        $this->postdataActionProceed();
-     }
+    public function convertAction()
+    {
 
+
+        // $shipping=$this->getRequest()->getParams('sales_quote_shipping_method');
+        // $payment=$this->getRequest()->getParams('sales_quote_payment_method');
+
+        $request=$this->getRequest()->getPostData();
+        Mage::getSingleton('sales/quote')->convert($request);
+
+        // $this->setRedirect('customer/order/order');
+
+        // print_r($request);
+
+        //ahiya quote and cutomer id kyathi aavi
+
+
+
+        // $addressRequest = $this->getRequest()->getParams('address');
+        // $addressData = Mage::getModel('sales/quote')->addAddress($addressRequest);
+        // $paymentRequest = $this->getRequest()->getParams('sales_quote_payment_method');
+        // $paymentData = Mage::getModel('sales/quote')->addPayment($paymentRequest);
+        // $shippingRequest = $this->getRequest()->getParams('sales_quote_shipping_method');
+        // $shippingData = Mage::getModel('sales/quote')->addShipping($shippingRequest);
+
+        // Mage::getSingleton('sales/quote')->convert();
+        // // Mage::getSingleton('core/session')->remove('quote_id');
+        // // $this->setRedirect('');
+    }
 }
+?>

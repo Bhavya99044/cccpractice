@@ -1,15 +1,12 @@
 <?php
-
 class Sales_Model_Quote_Item extends Core_Model_Abstract
 {
-
     public function init()
     {
         $this->_resourceClass = 'Sales_Model_Resource_Quote_Item';
         $this->_collectionClass = 'Sales_Model_Resource_Collection_Quote_Item';
         $this->_modelClass = 'sales/quote_item';
     }
-
     public function getProduct()
     {
         return Mage::getModel('catalog/product')->load($this->getProductId());
@@ -25,14 +22,17 @@ class Sales_Model_Quote_Item extends Core_Model_Abstract
         }
     }
 
+
     public function addItem(Sales_Model_Quote $quote, $productId, $qty)
     {
+    
+        
         $item = $this->getCollection()
             ->addFieldToFilter('product_id', $productId)
             ->addFieldToFilter('quote_id', $quote->getId())
-            ->getFirstItem()
-        ;
-
+            ->getFirstItem();
+            // print_r($item);
+            // die;
         if ($item) {
             $qty = $qty + $item->getQty();
         }
@@ -40,14 +40,56 @@ class Sales_Model_Quote_Item extends Core_Model_Abstract
             [
                 'quote_id' => $quote->getId(),
                 'product_id' => $productId,
-                'qty' => $qty,
+                'qty' => $qty
             ]
         );
         if ($item) {
             $this->setId($item->getId());
         }
         $this->save();
-
+        return $this;
+    }
+    public function removeItem(Sales_Model_Quote $quote, $itemId)
+    {
+        $item = $this->getCollection()
+            ->addFieldToFilter('item_id', $itemId)
+            ->addFieldToFilter('quote_id', $quote->getId())
+            ->getFirstItem();
+        // if ($item) {
+        //     $qty = $qty - $item->getQty();
+        // }
+        $this->setData(
+            [
+                'quote_id' => $quote->getId(),
+                'item_id' => $itemId
+            ]
+        );
+        $this->delete();
+        return $this;
+    }
+    public function updateItem(Sales_Model_Quote $quote, $itemId, $productId, $qty)
+    {
+        $item = $this->getCollection()
+            ->addFieldToFilter('item_id', $itemId)
+            ->addFieldToFilter('quote_id', $quote->getId())
+            ->addFieldToFilter('product_id', $productId)
+            ->getFirstItem();
+        // if ($item) {
+        //     $qty = $qty - $item->getQty();
+        // }
+        $this->setData(
+            [
+                'quote_id' => $quote->getId(),
+                'item_id' => $itemId,
+                'product_id' => $productId,
+                'qty' => $qty
+            ]
+        );
+        if ($item) {
+            $this->setId($item->getId());
+        }
+        $this->save();
         return $this;
     }
 }
+

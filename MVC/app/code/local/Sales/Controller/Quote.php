@@ -34,31 +34,24 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
     public function convertAction()
     {
 
+    $addressData=$this->getRequest()->getParams('address');
+    Mage::getSingleton('sales/quote')->addAddress($addressData);
 
-        // $shipping=$this->getRequest()->getParams('sales_quote_shipping_method');
-        // $payment=$this->getRequest()->getParams('sales_quote_payment_method');
+    $shippingData=$this->getRequest()->getParams('sales_quote_shipping_method');
+    $shipping=Mage::getSingleton('sales/quote')->addShipping($shippingData);
 
-        $request=$this->getRequest()->getPostData();
-        Mage::getSingleton('sales/quote')->convert($request);
-
-        // $this->setRedirect('customer/order/order');
-
-        // print_r($request);
-
-        //ahiya quote and cutomer id kyathi aavi
+    
+    
+    Mage::getSingleton('sales/quote')->addshipId($shipping->getId());
 
 
+    $payment=$this->getRequest()->getParams('sales_quote_payment_method');
+    $payment=Mage::getSingleton('sales/quote')->addPayment($payment);
+    Mage::getSingleton('sales/quote')->addPayId($payment->getId());
 
-        // $addressRequest = $this->getRequest()->getParams('address');
-        // $addressData = Mage::getModel('sales/quote')->addAddress($addressRequest);
-        // $paymentRequest = $this->getRequest()->getParams('sales_quote_payment_method');
-        // $paymentData = Mage::getModel('sales/quote')->addPayment($paymentRequest);
-        // $shippingRequest = $this->getRequest()->getParams('sales_quote_shipping_method');
-        // $shippingData = Mage::getModel('sales/quote')->addShipping($shippingRequest);
 
-        // Mage::getSingleton('sales/quote')->convert();
-        // // Mage::getSingleton('core/session')->remove('quote_id');
-        // // $this->setRedirect('');
+    Mage::getSingleton('sales/quote')->convert();
+
     }
 }
-?>
+?> 

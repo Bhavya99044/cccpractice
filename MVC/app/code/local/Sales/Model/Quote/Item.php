@@ -14,11 +14,13 @@ class Sales_Model_Quote_Item extends Core_Model_Abstract
 
     protected function _beforeSave()
     {
+
         if ($this->getProductId()) {
             $price = $this->getProduct()->getPrice();
             $this->addData('price', $price);
             $this->addData('row_total', $price * $this->getQty());
         } else {
+
         }
     }
 
@@ -31,10 +33,17 @@ class Sales_Model_Quote_Item extends Core_Model_Abstract
             ->addFieldToFilter('product_id', $productId)
             ->addFieldToFilter('quote_id', $quote->getId())
             ->getFirstItem();
-            // print_r($item);
-            // die;
+            
         if ($item) {
+
+            if($item->getQty()==1){
+                $qty=$qty+1;
+            }
+            else
+
             $qty = $qty + $item->getQty();
+            
+
         }
         $this->setData(
             [
